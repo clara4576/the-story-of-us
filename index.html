@@ -1,0 +1,509 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Story of Us ♡</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cream: #fff8ed;
+  --paper: #f8eddd;
+  --pink: #dba4a5;
+  --dark-pink: #a96770;
+  --brown: #674b3e;
+  --ink: #48352e;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse at top, #f8dfe0, transparent 65%),
+    linear-gradient(135deg, #f4dadd, #e8c8bc);
+  font-family: 'Cormorant Garamond', serif;
+  overflow-x: hidden;
+}
+
+button { font: inherit; }
+
+.intro {
+  text-align: center;
+  padding: 30px 15px 10px;
+}
+
+.intro .small {
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #9a6d69;
+}
+
+.intro h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(40px, 8vw, 65px);
+  font-weight: 500;
+  margin: 8px 0;
+  color: #88545b;
+}
+
+.intro p {
+  font-size: 18px;
+  font-style: italic;
+  margin: 0;
+}
+
+.book-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px 12px 10px;
+  perspective: 1800px;
+}
+
+.book {
+  position: relative;
+  width: min(90vw, 430px);
+  height: min(122vw, 590px);
+  max-height: 590px;
+  min-height: 440px;
+  transform-style: preserve-3d;
+  filter: drop-shadow(12px 16px 16px #795b5140);
+}
+
+.page {
+  position: absolute;
+  inset: 0;
+  padding: 32px 26px;
+  border: 1px solid #dfcbb3;
+  border-radius: 4px 14px 14px 4px;
+  background:
+    linear-gradient(90deg, #d9c5aa 0px, transparent 12px),
+    repeating-linear-gradient(
+      0deg, transparent, transparent 30px,
+      #a58b7120 31px
+    ),
+    var(--cream);
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform 1s cubic-bezier(.645,.045,.355,1);
+  backface-visibility: hidden;
+  overflow: hidden;
+  box-shadow: inset 8px 0 12px #76553b18;
+}
+
+.page.flipped {
+  transform: rotateY(-180deg);
+  pointer-events: none;
+}
+
+.page.cover {
+  z-index: 10;
+  background:
+    radial-gradient(ellipse at center, #c58d83 0%, #a86e68 100%);
+  color: #fff5e8;
+  border: 7px double #e8c4a5;
+  box-shadow: inset 0 0 30px #754a3e66;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.cover-inner {
+  border: 1px solid #f1d8bc;
+  padding: 45px 15px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cover .flower {
+  font-size: 36px;
+  margin-bottom: 18px;
+}
+
+.cover h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(43px, 10vw, 60px);
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.cover p {
+  font-size: 17px;
+  font-style: italic;
+  letter-spacing: 1px;
+  margin-top: 22px;
+}
+
+.cover .open-text {
+  font-size: 12px;
+  letter-spacing: 3px;
+  margin-top: 45px;
+}
+
+.page-number {
+  position: absolute;
+  bottom: 16px;
+  right: 25px;
+  font-style: italic;
+  font-size: 13px;
+  color: #a17e69;
+}
+
+.page h2 {
+  font-family: 'Dancing Script', cursive;
+  font-weight: 500;
+  font-size: 35px;
+  text-align: center;
+  color: #a66e72;
+  margin: 5px 0 12px;
+}
+
+.page .subtitle {
+  text-align: center;
+  font-style: italic;
+  font-size: 15px;
+  margin-bottom: 22px;
+}
+
+.page .body-text {
+  font-size: 19px;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.heart {
+  color: #bd777c;
+  text-align: center;
+  font-size: 23px;
+  margin: 12px;
+}
+
+.polaroid {
+  width: 75%;
+  margin: 12px auto 20px;
+  background: white;
+  padding: 9px 9px 30px;
+  box-shadow: 2px 5px 12px #5c403d30;
+  transform: rotate(-3deg);
+}
+
+.polaroid img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: #eadbd2;
+  display: block;
+}
+
+.polaroid .caption {
+  font-family: 'Dancing Script', cursive;
+  font-size: 21px;
+  text-align: center;
+  margin-top: 8px;
+  color: #775c4f;
+}
+
+.note {
+  background: #f5e3dc;
+  padding: 20px;
+  margin: 20px 2px;
+  transform: rotate(1deg);
+  box-shadow: 2px 3px 10px #674b3e18;
+  font-family: 'Dancing Script', cursive;
+  font-size: 23px;
+  line-height: 1.5;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  padding: 18px;
+}
+
+.controls button, .music-button {
+  border: 1px solid #b98680;
+  background: #fff5ed;
+  color: #885c56;
+  border-radius: 30px;
+  padding: 11px 22px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.controls button:hover, .music-button:hover {
+  background: #bd8586;
+  color: white;
+}
+
+#counter {
+  font-size: 15px;
+  color: #865f59;
+  min-width: 55px;
+  text-align: center;
+}
+
+.music {
+  text-align: center;
+  padding-bottom: 15px;
+}
+
+.footer {
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+  font-size: 22px;
+  color: #966a69;
+  padding: 8px 15px 30px;
+}
+
+@media(max-width: 400px) {
+  .book {
+    min-height: 420px;
+  }
+  .page { padding: 24px 18px; }
+  .polaroid img { height: 160px; }
+  .page .body-text { font-size: 17px; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="intro">
+  <div class="small">A little piece of forever</div>
+  <h1>The Story of Us</h1>
+  <p>Every little moment, a memory worth keeping ♡</p>
+</header>
+
+<main class="book-area">
+  <div class="book" id="book">
+
+    <!-- COVER -->
+    <section class="page cover">
+      <div class="cover-inner">
+        <div class="flower">🌷 ♡ 🌷</div>
+        <h2>The Story<br>of Us</h2>
+        <p>A thousand little moments.<br>One beautiful love story.</p>
+        <div class="heart">♥</div>
+        <div class="open-text">TURN THE PAGE TO BEGIN</div>
+      </div>
+    </section>
+
+    <!-- PAGE 1 -->
+    <section class="page">
+      <h2>Once Upon a Time...</h2>
+      <p class="subtitle">And then there was us ♡</p>
+      <div class="heart">✿</div>
+      <p class="body-text">
+        Somewhere between ordinary days and unexpected moments,
+        our story began.
+      </p>
+      <div class="note">
+        I didn't know it then, but some of my favourite memories
+        were about to begin with you.
+      </div>
+      <div class="heart">♡</div>
+      <div class="page-number">01</div>
+    </section>
+
+    <!-- PAGE 2 -->
+    <section class="page">
+      <h2>Our First Memories</h2>
+      <p class="subtitle">The beginning of everything</p>
+      <div class="polaroid">
+        <img src="https://placehold.co/500x400/f1ddd8/916b65?text=Our+First+Memory"
+             alt="Our first memory">
+        <div class="caption">A moment I'll never forget ♡</div>
+      </div>
+      <p class="body-text">
+        This is where you can write about your first meeting,
+        your first conversation, or your favourite beginning.
+      </p>
+      <div class="page-number">02</div>
+    </section>
+
+    <!-- PAGE 3 -->
+    <section class="page">
+      <h2>Little Things I Love</h2>
+      <p class="subtitle">It's always the little things...</p>
+      <div class="note">
+        Your smile. Your laugh. The way you look at me.
+        The silly conversations. The comfortable silence.
+        All the little things that somehow mean everything.
+      </div>
+      <p class="body-text">
+        You make ordinary days feel a little more magical.
+      </p>
+      <div class="heart">♡ ♡ ♡</div>
+      <div class="page-number">03</div>
+    </section>
+
+    <!-- PAGE 4 -->
+    <section class="page">
+      <h2>Our Little Gallery</h2>
+      <p class="subtitle">Frozen pieces of forever</p>
+      <div class="polaroid">
+        <img src="https://placehold.co/500x400/ead9d1/916b65?text=Our+Favourite+Photo"
+             alt="Our favourite photo">
+        <div class="caption">My favourite person.</div>
+      </div>
+      <p class="body-text">
+        Every picture has a story.
+        Every story has you.
+      </p>
+      <div class="page-number">04</div>
+    </section>
+
+    <!-- PAGE 5 -->
+    <section class="page">
+      <h2>A Little Letter</h2>
+      <p class="subtitle">Something from my heart</p>
+      <div class="note">
+        My favourite human,
+
+        Thank you for being part of my world.
+        Thank you for all the laughs, the memories,
+        and even the little moments that might seem ordinary.
+
+        If I could choose again, I'd still choose
+        all these moments with you.
+
+        With all my love, ♡
+      </div>
+      <div class="page-number">05</div>
+    </section>
+
+    <!-- PAGE 6 -->
+    <section class="page">
+      <h2>To Be Continued...</h2>
+      <div class="heart">✧ ♥ ✧</div>
+      <p class="body-text">
+        This isn't the end of our story.
+        There are still places to visit,
+        dreams to chase, pictures to take,
+        and a million memories to make.
+      </p>
+      <div class="note" style="text-align:center">
+        Here's to us, today and all the tomorrows. ♡
+      </div>
+      <p class="body-text" style="font-family:'Dancing Script';font-size:29px">
+        Forever isn't long enough.
+      </p>
+      <div class="page-number">06</div>
+    </section>
+
+  </div>
+</main>
+
+<div class="controls">
+  <button id="prev">← Previous</button>
+  <span id="counter">Cover</span>
+  <button id="next">Next →</button>
+</div>
+
+<div class="music">
+  <audio id="loveMusic" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+  <button class="music-button" id="musicBtn">♫ Play our music</button>
+  <p style="font-size:13px;color:#916e65">
+    A little melody for our little world
+  </p>
+</div>
+
+<footer class="footer">
+  Made with love, just for us. ♡
+</footer>
+
+<script>
+const pages = [...document.querySelectorAll('.page')];
+const counter = document.getElementById('counter');
+const next = document.getElementById('next');
+const prev = document.getElementById('prev');
+
+let current = 0;
+
+function updateBook() {
+  pages.forEach((page, index) => {
+    page.classList.toggle('flipped', index < current);
+    page.style.zIndex = index < current
+      ? index + 1
+      : pages.length - index + 10;
+  });
+
+  counter.textContent = current === 0
+    ? 'Cover'
+    : current >= pages.length
+      ? 'The End ♡'
+      : `Page ${current} of ${pages.length - 1}`;
+
+  prev.disabled = current === 0;
+  next.disabled = current === pages.length;
+
+  prev.style.opacity = current === 0 ? '.4' : '1';
+  next.style.opacity = current === pages.length ? '.4' : '1';
+}
+
+next.addEventListener('click', () => {
+  if (current < pages.length) {
+    current++;
+    updateBook();
+  }
+});
+
+prev.addEventListener('click', () => {
+  if (current > 0) {
+    current--;
+    updateBook();
+  }
+});
+
+pages.forEach((page, index) => {
+  page.addEventListener('click', (event) => {
+    if (event.target.closest('button')) return;
+    if (index === current && current < pages.length) {
+      current++;
+      updateBook();
+    } else if (index === current - 1 && current > 0) {
+      current--;
+      updateBook();
+    }
+  });
+});
+
+const music = document.getElementById('loveMusic');
+const musicBtn = document.getElementById('musicBtn');
+
+musicBtn.addEventListener('click', async () => {
+  if (music.paused) {
+    try {
+      await music.play();
+      musicBtn.textContent = '♫ Pause our music';
+    } catch {
+      musicBtn.textContent = 'Add your music.mp3 first ♡';
+    }
+  } else {
+    music.pause();
+    musicBtn.textContent = '♫ Play our music';
+  }
+});
+
+updateBook();
+</script>
+
+</body>
+</html>
